@@ -20,6 +20,7 @@ void main() {
     appReducer,
     initialState: AppState(bottomNavigationBarSelectedIndex: 0),
   );
+  print(store.state);
   runApp(StoreProvider(store: store, child: MyApp()));
 } 
 

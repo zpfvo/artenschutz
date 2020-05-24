@@ -7,4 +7,9 @@ class AppState {
   const AppState({
     @required this.bottomNavigationBarSelectedIndex,
   });
+
+  @override
+  String toString() {
+    return 'AppState: {bottomNavigationBarSelectedIndex: $bottomNavigationBarSelectedIndex}';
+  }
 }
