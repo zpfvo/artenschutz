@@ -15,11 +15,13 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:artenschatuz_am_gebaeude/models/models.dart';
 import 'package:artenschatuz_am_gebaeude/reducers/app_reducer.dart';
 import 'package:artenschatuz_am_gebaeude/actions/actions.dart';
+import 'package:redux_logging/redux_logging.dart';
 
 void main() {
   final store = Store<AppState>(
     appReducer,
     initialState: AppState(bottomNavigationBarSelectedIndex: 0),
+    middleware: [new LoggingMiddleware.printer()]
   );
   runApp(StoreProvider(store: store, child: MyApp()));
 } 
@@ -50,11 +52,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Beobachtungen',
+      'Standorte',
       style: optionStyle,
     ),
     Text(
-      'Standorte',
+      'Beobachtung',
       style: optionStyle,
     ),
     Text(
@@ -84,11 +86,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.remove_red_eye),
-                title: Text('Beobachtung'),
+                title: Text('Standorte'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.location_on),
-                title: Text('Standorte'),
+                title: Text('Beobachtung'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.history),
