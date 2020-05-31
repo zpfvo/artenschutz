@@ -14,13 +14,13 @@ import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:artenschatuz_am_gebaeude/models/models.dart';
 import 'package:artenschatuz_am_gebaeude/reducers/app_reducer.dart';
+import 'package:artenschatuz_am_gebaeude/actions/actions.dart';
 
 void main() {
   final store = Store<AppState>(
     appReducer,
     initialState: AppState(bottomNavigationBarSelectedIndex: 0),
   );
-  print(store.state);
   runApp(StoreProvider(store: store, child: MyApp()));
 } 
 
@@ -46,7 +46,6 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -64,39 +63,44 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Artenschutz am Gebäude'),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.remove_red_eye),
-            title: Text('Beobachtung'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            title: Text('Standorte'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            title: Text('Archiv'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+      body: StoreConnector<AppState, int>(
+        converter: (Store<AppState> store) => store.state.bottomNavigationBarSelectedIndex,
+        builder: (BuildContext context, int bottomNavigationBarSelectedIndex) {
+          return Center(
+            child: _widgetOptions.elementAt(bottomNavigationBarSelectedIndex)
+            );
+        }
+        ),
+      bottomNavigationBar: StoreConnector<AppState, int>(
+        converter: (Store<AppState> store) => store.state.bottomNavigationBarSelectedIndex,
+        builder: (BuildContext context, int bottomNavigationBarSelectedIndex) {
+          return BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.remove_red_eye),
+                title: Text('Beobachtung'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.location_on),
+                title: Text('Standorte'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.history),
+                title: Text('Archiv'),
+              ),
+            ],
+            currentIndex: bottomNavigationBarSelectedIndex,
+            selectedItemColor: Colors.amber[800],
+            onTap: (index) => StoreProvider.of<AppState>(context)
+                        .dispatch(SelectNavigationBarIndex(index)),
+          );
+        }
       ),
     );
   }
