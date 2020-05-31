@@ -1,14 +1,3 @@
-// Flutter code sample for BottomNavigationBar
-
-// This example shows a [BottomNavigationBar] as it is used within a [Scaffold]
-// widget. The [BottomNavigationBar] has three [BottomNavigationBarItem]
-// widgets and the [currentIndex] is set to index 0. The selected item is
-// amber. The `_onItemTapped` function changes the selected item's index
-// and displays a corresponding message in the center of the [Scaffold].
-//
-// ![A scaffold with a bottom navigation bar containing three bottom navigation
-// bar items. The first one is selected.](https://flutter.github.io/assets-for-api-docs/assets/material/bottom_navigation_bar.png)
-
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -16,6 +5,8 @@ import 'package:artenschatuz_am_gebaeude/models/models.dart';
 import 'package:artenschatuz_am_gebaeude/reducers/app_reducer.dart';
 import 'package:artenschatuz_am_gebaeude/actions/actions.dart';
 import 'package:redux_logging/redux_logging.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 void main() {
   final store = Store<AppState>(
@@ -85,11 +76,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           return BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.remove_red_eye),
+                icon: Icon(FontAwesomeIcons.mapMarkedAlt),
                 title: Text('Standorte'),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.location_on),
+                icon: Icon(FontAwesomeIcons.binoculars),
                 title: Text('Beobachtung'),
               ),
               BottomNavigationBarItem(
