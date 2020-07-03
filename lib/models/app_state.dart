@@ -1,4 +1,4 @@
-import 'package:meta/meta.dart';
+import 'package:meta/meta.dart' show immutable, required;
 
 @immutable
 class AppState {
@@ -12,4 +12,6 @@ class AppState {
   String toString() {
     return 'AppState: {bottomNavigationBarSelectedIndex: $bottomNavigationBarSelectedIndex}';
   }
+
+  static AppState init() => AppState(bottomNavigationBarSelectedIndex: 0);
 }
