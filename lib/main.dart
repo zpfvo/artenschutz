@@ -1,11 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:artenschatuz_am_gebaeude/models/models.dart';
-import 'package:artenschatuz_am_gebaeude/reducers/app_reducer.dart';
-import 'package:artenschatuz_am_gebaeude/actions/actions.dart';
-import 'package:redux_logging/redux_logging.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart' show
+  runApp, Widget, StatelessWidget, StatefulWidget, State, 
+  BuildContext, MaterialApp, Key,
+  TextStyle, FontWeight, Text, Center, Icons, Icon, Colors,
+  Scaffold, AppBar, BottomNavigationBar, BottomNavigationBarItem;
+import 'package:redux/redux.dart' show Store;
+import 'package:flutter_redux/flutter_redux.dart' show StoreProvider, StoreConnector;
+import 'package:artenschatuz_am_gebaeude/models/models.dart' show AppState;
+import 'package:artenschatuz_am_gebaeude/reducers/app_reducer.dart' show appReducer;
+import 'package:artenschatuz_am_gebaeude/actions/actions.dart' show SelectNavigationBarIndex;
+import 'package:redux_logging/redux_logging.dart' show LoggingMiddleware;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart' show FontAwesomeIcons;
 
 
 void main() {
@@ -26,19 +30,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: MyStatefulWidget(),
+      home: AppScaffold(),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
+class AppScaffold extends StatefulWidget {
+  AppScaffold({Key key}) : super(key: key);
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _AppScaffoldState createState() => _AppScaffoldState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _AppScaffoldState extends State<AppScaffold> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
