@@ -18,10 +18,9 @@ import 'package:flutter_redux/flutter_redux.dart'
 import 'package:artenschatuz_am_gebaeude/reducers/app_reducer.dart'
     show appReducer;
 import 'package:redux_logging/redux_logging.dart' show LoggingMiddleware;
-
 import 'package:artenschatuz_am_gebaeude/models/models.dart' show AppState;
-
 import 'package:artenschatuz_am_gebaeude/navigation_bar.dart' show AppNavBar;
+import 'package:artenschatuz_am_gebaeude/locations.dart' show Locations;
 
 class ArtenschutzApp extends StatefulWidget {
   const ArtenschutzApp({
@@ -84,15 +83,7 @@ class _AppScaffoldState extends State<AppScaffold> {
         appBar: AppBar(
           title: const Text('Artenschutz am Gebäude'),
         ),
-        body: StoreConnector<AppState, int>(
-            converter: (Store<AppState> store) =>
-                store.state.bottomNavigationBarSelectedIndex,
-            builder:
-                (BuildContext context, int bottomNavigationBarSelectedIndex) {
-              return Center(
-                  child: _widgetOptions
-                      .elementAt(bottomNavigationBarSelectedIndex));
-            }),
+        body: Locations(),
         bottomNavigationBar: AppNavBar());
   }
 }
