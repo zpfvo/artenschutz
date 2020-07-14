@@ -60,23 +60,6 @@ class AppScaffold extends StatefulWidget {
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Standorte',
-      style: optionStyle,
-    ),
-    Text(
-      'Beobachtung',
-      style: optionStyle,
-    ),
-    Text(
-      'Archiv',
-      style: optionStyle,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

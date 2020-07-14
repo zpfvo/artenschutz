@@ -1,9 +1,10 @@
 import 'package:meta/meta.dart' show immutable, required;
+import 'package:artenschatuz_am_gebaeude/models/location.dart' show Location;
 
 @immutable
 class AppState {
   final int bottomNavigationBarSelectedIndex;
-  final List<String> locations;
+  final List<Location> locations;
 
   const AppState(
       {@required this.bottomNavigationBarSelectedIndex,
@@ -18,5 +19,11 @@ class AppState {
   }
 
   static AppState init() =>
-      AppState(bottomNavigationBarSelectedIndex: 0, locations: []);
+      AppState(bottomNavigationBarSelectedIndex: 0, locations: [
+        Location(
+            street: 'Kastanienallee',
+            houseNumber: '84',
+            postalCode: '10435',
+            city: 'Berlin')
+      ]);
 }
